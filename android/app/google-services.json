@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "514382811005",
+    "firebase_url": "https://revisoes-b93ee-default-rtdb.firebaseio.com",
+    "project_id": "revisoes-b93ee",
+    "storage_bucket": "revisoes-b93ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514382811005:android:f7f84b629840b43cbdc614",
+        "android_client_info": {
+          "package_name": "com.revisoesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAreXDtUrPu0eUnyo8NSr1c6ak8cffUZVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

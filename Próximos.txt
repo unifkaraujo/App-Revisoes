@@ -1,0 +1,6 @@
+
+* Criar o repositório no git (pensar direito nisso)
+
+* Ajustar o loading quando está carregando novos itens (na verdade acho que nem precisa, mas analisar certinho) - 
+
+* Ajustar a linha do scrollview, precisa aparecer (se atentar para não mexer no problema do teclado abrindo quando rola o campo) - 
