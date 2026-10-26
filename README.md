@@ -41,7 +41,7 @@ O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e 
 - 🔎 **Busca instantânea** por título e conteúdo, com filtro memoizado.
 - ✏️ **Criar, editar e excluir**, com confirmação antes de excluir e indicador de progresso em cada ação.
 - 🛡️ **Dados isolados por usuário:** cada conta só lê e escreve no próprio nó do banco, com a regra aplicada no servidor.
-- 🇧🇷 **Mensagens de erro em português:** os códigos do Firebase viram mensagens claras ("E-mail ou senha incorretos", "Este e-mail já está cadastrado"...).
+- 💬 **Mensagens de erro em português:** os códigos do Firebase viram mensagens claras ("E-mail ou senha incorretos", "Este e-mail já está cadastrado"...).
 
 ## 📱 Telas
 
