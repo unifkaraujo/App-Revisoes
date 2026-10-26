@@ -26,7 +26,7 @@ export default function ModalFormularioRevisao({
   return (
     <ModalDialogo
       visivel={visivel}
-      titulo="Adicionar Novo Texto"
+      titulo={formulario.editando ? 'Editar Texto' : 'Adicionar Novo Texto'}
       onFechar={onFechar}>
       <CampoTextoComRotulo
         rotulo="Título"
