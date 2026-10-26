@@ -1,18 +1,25 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import HomeScreen from './src/screens/HomeScreen';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import Rotas from './src/navigation/Rotas';
+import {cores} from './src/theme/cores';
 
 export default function App() {
   return (
     <>
-      <StatusBar backgroundColor="#e0f0ff" barStyle="dark-content" />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: '#e0f0ff',
-        }}>
-        <HomeScreen />
+      <StatusBar
+        backgroundColor={cores.fundoCabecalho}
+        barStyle="dark-content"
+      />
+      <SafeAreaView style={estilos.container}>
+        <Rotas />
       </SafeAreaView>
     </>
   );
 }
+
+const estilos = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: cores.fundoCabecalho,
+  },
+});

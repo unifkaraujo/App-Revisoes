@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const configuracaoFirebase = {
   apiKey: 'AIzaSyAreXDtUrPu0eUnyo8NSr1c6ak8cffUZVA',
   authDomain: 'revisoes-b93ee.firebaseapp.com',
   databaseURL: 'https://revisoes-b93ee-default-rtdb.firebaseio.com',

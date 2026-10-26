@@ -5,3 +5,5 @@ export interface Revisao {
   conteudo: string;
   titulo?: string;
 }
+
+export type DadosRevisao = Omit<Revisao, 'id'>;
