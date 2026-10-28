@@ -19,6 +19,7 @@ export default function ModalDialogo({
     <Modal
       visible={visivel}
       transparent
+      statusBarTranslucent
       onRequestClose={onFechar}
       animationType="fade">
       <View style={estilos.sobreposicao}>
