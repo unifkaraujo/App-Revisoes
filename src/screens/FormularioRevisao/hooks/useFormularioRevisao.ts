@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {DadosRevisao, Revisao} from '../../../types/Revisao';
 import {calcularDataRevisao} from '../../../utils/regrasRevisao';
 
@@ -6,13 +6,13 @@ export interface ValoresFormularioRevisao {
   titulo: string;
   conteudo: string;
   numeroRevisao: string;
+  categoriaId: string;
 }
 
 type SalvarRevisao = (revisao: DadosRevisao, id?: string) => Promise<void>;
 
 interface UseFormularioRevisaoParametros {
   revisao: Revisao | null;
-  visivel: boolean;
   onSalvar: SalvarRevisao;
 }
 
@@ -20,6 +20,7 @@ const FORMULARIO_VAZIO: ValoresFormularioRevisao = {
   titulo: '',
   conteudo: '',
   numeroRevisao: '1',
+  categoriaId: '',
 };
 
 function paraValoresFormulario(
@@ -32,6 +33,7 @@ function paraValoresFormulario(
     titulo: revisao.titulo ?? '',
     conteudo: revisao.conteudo,
     numeroRevisao: String(revisao.numeroRevisao),
+    categoriaId: revisao.categoriaId ?? '',
   };
 }
 
@@ -52,22 +54,16 @@ function paraDadosRevisao(
     conteudo: valores.conteudo,
     numeroRevisao: parseInt(valores.numeroRevisao, 10),
     dataRevisao,
+    ...(valores.categoriaId ? {categoriaId: valores.categoriaId} : {}),
   };
 }
 
 export function useFormularioRevisao({
   revisao,
-  visivel,
   onSalvar,
 }: UseFormularioRevisaoParametros) {
-  const [valores, setValores] = useState(FORMULARIO_VAZIO);
+  const [valores, setValores] = useState(() => paraValoresFormulario(revisao));
   const [salvando, setSalvando] = useState(false);
-
-  useEffect(() => {
-    if (visivel) {
-      setValores(paraValoresFormulario(revisao));
-    }
-  }, [visivel, revisao]);
 
   const alterarCampo =
     (campo: keyof ValoresFormularioRevisao) => (valor: string) =>

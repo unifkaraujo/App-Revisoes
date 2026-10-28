@@ -1,6 +1,11 @@
 import {Revisao} from '../types/Revisao';
 import {converterDataBr, formatarDataBr, somarDiasAHoje} from './datas';
 
+export interface FiltroRevisoes {
+  pesquisa: string;
+  idCategoria: string | null;
+}
+
 function obterTempoRevisao(revisao: Revisao): number {
   return converterDataBr(revisao.dataRevisao).getTime();
 }
@@ -21,12 +26,32 @@ function correspondePesquisa(revisao: Revisao, termo: string): boolean {
   );
 }
 
-export function filtrarPorPesquisa(
+function correspondeCategoria(
+  revisao: Revisao,
+  idCategoria: string | null,
+): boolean {
+  return !idCategoria || revisao.categoriaId === idCategoria;
+}
+
+export function filtrarRevisoes(
   revisoes: Revisao[],
-  pesquisa: string,
+  {pesquisa, idCategoria}: FiltroRevisoes,
 ): Revisao[] {
   const termo = pesquisa.toLowerCase();
-  return revisoes.filter(revisao => correspondePesquisa(revisao, termo));
+  return revisoes.filter(
+    revisao =>
+      correspondeCategoria(revisao, idCategoria) &&
+      correspondePesquisa(revisao, termo),
+  );
+}
+
+export function idsDaCategoria(
+  revisoes: Revisao[],
+  idCategoria: string,
+): string[] {
+  return revisoes
+    .filter(revisao => revisao.categoriaId === idCategoria)
+    .map(revisao => revisao.id);
 }
 
 export function calcularDataRevisao(numeroDias: string): string {

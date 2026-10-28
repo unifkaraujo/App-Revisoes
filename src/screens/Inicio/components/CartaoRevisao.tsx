@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Revisao} from '../../../types/Revisao';
+import {Categoria} from '../../../types/Categoria';
 import {cores} from '../../../theme/cores';
 
 interface CartaoRevisaoProps {
   revisao: Revisao;
+  categoria?: Categoria;
   excluindo: boolean;
   onSelecionar: (revisao: Revisao) => void;
   onExcluir: (id: string) => void;
@@ -12,16 +14,21 @@ interface CartaoRevisaoProps {
 
 export default function CartaoRevisao({
   revisao,
+  categoria,
   excluindo,
   onSelecionar,
   onExcluir,
 }: CartaoRevisaoProps) {
   return (
     <TouchableOpacity activeOpacity={1} onPress={() => onSelecionar(revisao)}>
-      <View style={estilos.cartao}>
+      <View
+        style={[estilos.cartao, categoria && {backgroundColor: categoria.cor}]}>
         <View style={estilos.cabecalho}>
           <View style={estilos.containerTitulo}>
             <Text style={estilos.titulo}>{revisao.titulo}</Text>
+            {categoria ? (
+              <Text style={estilos.categoria}>{categoria.nome}</Text>
+            ) : null}
           </View>
           <Text style={estilos.data}>{revisao.dataRevisao}</Text>
         </View>
@@ -74,6 +81,12 @@ const estilos = StyleSheet.create({
     fontSize: 14,
     color: cores.destaque,
   },
+  categoria: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginTop: 2,
+    color: cores.textoSecundario,
+  },
   conteudo: {
     color: cores.textoSuave,
   },
@@ -84,6 +97,6 @@ const estilos = StyleSheet.create({
   },
   textoAcao: {
     marginLeft: 20,
-    color: cores.destaque,
+    color: cores.tituloCabecalho,
   },
 });

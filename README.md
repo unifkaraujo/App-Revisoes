@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/banner.svg" alt="RevisõesApp" width="100%" />
+  <img src="docs/images/banner.svg" alt="Relembra" width="100%" />
 </p>
 
 <p align="center">
@@ -24,12 +24,12 @@
 
 ---
 
-O **RevisõesApp** é um aplicativo mobile para quem estuda com **revisões programadas**. Você registra um conteúdo, define em quantos dias quer revisá-lo e o app calcula a data e mantém a lista ordenada pela próxima revisão. Cada pessoa tem sua conta, e os dados de cada usuário ficam isolados no servidor por regras de segurança.
+O **Relembra** é um aplicativo mobile para quem estuda com **revisões programadas**. Você registra um conteúdo, define em quantos dias quer revisá-lo e o app calcula a data e mantém a lista ordenada pela próxima revisão. Cada pessoa tem sua conta, e os dados de cada usuário ficam isolados no servidor por regras de segurança.
 
 O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e evoluiu para um app multiusuário com arquitetura em camadas, autenticação completa e foco em código limpo.
 
 <p align="center">
-  <img src="docs/images/vitrine.png" alt="Telas do RevisõesApp: login, lista de revisões e edição" width="100%" />
+  <img src="docs/images/vitrine.png" alt="Telas do Relembra: login, lista de revisões e edição" width="100%" />
 </p>
 
 ## ✨ Funcionalidades
@@ -38,7 +38,8 @@ O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e 
 - 💾 **Sessão persistente:** o app lembra o usuário entre aberturas.
 - 📅 **Agendamento de revisões:** você informa o número de dias e vê na hora a data calculada.
 - 🗂️ **Lista ordenada pela próxima revisão:** o que vence primeiro aparece no topo.
-- 🔎 **Busca instantânea** por título e conteúdo, com filtro memoizado.
+- 🏷️ **Categorias com cor própria:** cada categoria nasce com uma cor pastel aleatória, escolhida para ficar bem longe das cores que já existem e sempre legível com o texto escuro do card.
+- 🔎 **Busca instantânea** por título e conteúdo, combinada com o **filtro por categoria**: as 3 categorias mais usadas ficam à mão e o "Ver todas" abre a lista completa, com a contagem de revisões e a opção de excluir.
 - ✏️ **Criar, editar e excluir**, com confirmação antes de excluir e indicador de progresso em cada ação.
 - 🛡️ **Dados isolados por usuário:** cada conta só lê e escreve no próprio nó do banco, com a regra aplicada no servidor.
 - 💬 **Mensagens de erro em português:** os códigos do Firebase viram mensagens claras ("E-mail ou senha incorretos", "Este e-mail já está cadastrado"...).
@@ -56,10 +57,10 @@ O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e 
 | Camada | Tecnologia | Para que serve |
 |---|---|---|
 | UI | **React Native 0.71** + **React 18** | Interface nativa a partir de componentes funcionais e hooks |
-| Linguagem | **TypeScript** | Tipagem do domínio (`Revisao`, `DadosRevisao`, `Usuario`) e das props de cada componente |
+| Linguagem | **TypeScript** | Tipagem do domínio (`Revisao`, `Categoria`, `Usuario`) e das props de cada componente |
 | Autenticação | **Firebase Auth (SDK v11)** | Cadastro, login, recuperação de senha e emissão de ID tokens |
 | Persistência da sessão | **AsyncStorage** | `getReactNativePersistence` mantém o usuário logado entre aberturas |
-| Banco de dados | **Firebase Realtime Database (API REST)** | Armazena as revisões em `/usuarios/{uid}/revisoes` |
+| Banco de dados | **Firebase Realtime Database (API REST)** | Armazena revisões e categorias em `/usuarios/{uid}` |
 | HTTP | **Axios** | Cliente único, com um interceptor que injeta o token em cada requisição |
 | Datas | **date-fns** | Formatação, parsing e soma de dias no padrão `dd/MM/yyyy` |
 | Teclado | **react-native-keyboard-aware-scroll-view** | Os formulários de acesso continuam visíveis com o teclado aberto |
@@ -83,20 +84,20 @@ flowchart TD
     subgraph Estado["⚙️ Estado e orquestração (hooks)"]
         direction LR
         HA["useAutenticacao<br/>useEnvioFormulario"]
-        HI["useRevisoes · usePesquisaRevisoes<br/>useModalRevisao · useFormularioRevisao"]
+        HI["useRevisoes · useCategorias · useFiltroRevisoes<br/>useCategoriasPrincipais · useFormularioRevisao"]
     end
 
     subgraph Dados["🔌 Serviços"]
         direction LR
         Auth["autenticacaoServico"]
-        Rev["revisaoServico"]
+        Rev["revisaoServico<br/>categoriaServico"]
         Http["clienteHttp<br/>(Axios + interceptor)"]
     end
 
     subgraph Dominio["📐 Domínio (puro)"]
         direction LR
         Tipos["types/"]
-        Regras["utils/<br/>regrasRevisao · datas · erros"]
+        Regras["utils/<br/>regrasRevisao · regrasCategoria<br/>coresCategoria · datas · erros"]
     end
 
     Acesso --> HA
@@ -132,16 +133,17 @@ src/
 ├── navigation/          # Rotas (logado ou não) e RotasAcesso (login/cadastro/recuperação)
 ├── screens/
 │   ├── Inicio/          # lista de revisões
-│   │   ├── components/  # CartaoRevisao, ListaRevisoes, ModalFormularioRevisao...
-│   │   ├── hooks/       # useRevisoes, usePesquisaRevisoes, useModalRevisao, useFormularioRevisao
+│   │   ├── components/  # CartaoRevisao, ListaRevisoes, FiltroCategorias, ModalCategorias
+│   │   ├── hooks/       # useRevisoes, useCategorias, useCategoriasPrincipais, useFiltroRevisoes, useEdicaoRevisao
 │   │   └── index.tsx
+│   ├── FormularioRevisao/  # tela de criar/editar revisão (CampoCategoria, CampoDiasRevisao, useFormularioRevisao)
 │   ├── Login/
 │   ├── Cadastro/
 │   └── RecuperarSenha/
-├── services/            # firebaseApp, autenticacaoServico, clienteHttp, revisaoServico
+├── services/            # firebaseApp, autenticacaoServico, clienteHttp, revisaoServico, categoriaServico
 ├── theme/               # cores
-├── types/               # Revisao, Usuario, Credenciais
-└── utils/               # regrasRevisao, datas, erros, alertas
+├── types/               # Revisao, Categoria, Usuario, Credenciais
+└── utils/               # regrasRevisao, regrasCategoria, coresCategoria, datas, erros, alertas
 ```
 
 Cada tela é um módulo com seus próprios `components/` e `hooks/`. O que é genérico sobe para `src/components` e `src/hooks`.
@@ -182,8 +184,10 @@ Cada usuário tem um nó próprio, e a regra garante, **no servidor**, que ningu
 ```text
 usuarios/
 └── {uid}/
+    ├── categorias/
+    │   └── {id}: { nome, cor }
     └── revisoes/
-        └── {id}: { titulo, conteudo, numeroRevisao, dataRevisao }
+        └── {id}: { titulo, conteudo, numeroRevisao, dataRevisao, categoriaId? }
 ```
 
 ```json
@@ -209,6 +213,8 @@ usuarios/
 - **Navegação condicional sem biblioteca.** Com quatro telas, um `Rotas` que escolhe entre área logada e área de acesso com base em `onAuthStateChanged` resolve o problema sem dependências extras. O botão voltar do Android é tratado com `BackHandler` num hook próprio.
 - **Erros tratados num lugar só.** `useEnvioFormulario` padroniza o estado de envio e de erro dos formulários, e `obterMensagemErro` traduz os códigos do Firebase e erros de validação (`ErroValidacao`) para mensagens amigáveis.
 - **Estado derivado em vez de estado duplicado.** A data da revisão é calculada a partir do número de dias a cada renderização, sem `useEffect` para sincronizar dois estados. A busca usa `useMemo`.
+- **Cores de categoria legíveis por construção.** A cor é gerada em HSL com saturação e luminosidade fixas (65% e 88%) e só o matiz é sorteado: entre 12 candidatos, fica o mais distante dos matizes já usados. Com a luminosidade travada, todos os textos do card passam no contraste WCAG AA (o pior caso é 4,8:1).
+- **Exclusão de categoria atômica.** Apagar uma categoria remove o nó e o `categoriaId` de todas as revisões dela num único `PATCH` multi-caminho, então o banco nunca fica com referências órfãs.
 - **Clean code.** Funções pequenas e com uma responsabilidade, nomes que dispensam comentários, estilos com `StyleSheet` e cores centralizadas em `theme/cores.ts`.
 - **Domínio em português.** Identificadores no idioma do domínio (`buscarRevisoes`, `CartaoRevisao`, `onExcluir`) e pastas no padrão do ecossistema (`components`, `hooks`, `services`).
 - **Migração sem perda de dados.** Na passagem do modelo de usuário único para multiusuário, as revisões existentes foram copiadas para o nó do dono original com um script que confere a quantidade e não sobrescreve nada.

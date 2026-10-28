@@ -1,29 +1,17 @@
 import {DadosRevisao, Revisao} from '../types/Revisao';
 import {clienteHttp} from './clienteHttp';
-import {obterIdUsuario} from './autenticacaoServico';
-
-type RespostaRevisoes = Record<string, DadosRevisao> | null;
-
-function caminhoRevisoes(): string {
-  return `/usuarios/${obterIdUsuario()}/revisoes`;
-}
+import {caminhoRevisoes} from './caminhos';
+import {paraListaComId, RespostaColecao} from './conversores';
 
 function caminhoRevisao(id: string): string {
   return `${caminhoRevisoes()}/${id}.json`;
 }
 
-function paraRevisoes(resposta: RespostaRevisoes): Revisao[] {
-  if (!resposta) {
-    return [];
-  }
-  return Object.entries(resposta).map(([id, revisao]) => ({id, ...revisao}));
-}
-
 export async function buscarRevisoes(): Promise<Revisao[]> {
-  const {data} = await clienteHttp.get<RespostaRevisoes>(
+  const {data} = await clienteHttp.get<RespostaColecao<DadosRevisao>>(
     `${caminhoRevisoes()}.json`,
   );
-  return paraRevisoes(data);
+  return paraListaComId(data);
 }
 
 async function criarRevisao(revisao: DadosRevisao): Promise<void> {

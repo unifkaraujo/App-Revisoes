@@ -50,5 +50,5 @@ export function useRevisoes() {
     [recarregar],
   );
 
-  return {revisoes, carregando, idExcluindo, salvar, excluir};
+  return {revisoes, carregando, idExcluindo, salvar, excluir, recarregar};
 }

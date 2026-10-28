@@ -11,6 +11,20 @@ export function confirmarExclusao(aoConfirmar: () => void) {
   );
 }
 
+export function confirmarExclusaoCategoria(
+  nome: string,
+  aoConfirmar: () => void,
+) {
+  Alert.alert(
+    'Excluir categoria',
+    `Excluir "${nome}"? As revisões dela continuam salvas, só ficam sem categoria.`,
+    [
+      {text: 'Cancelar', style: 'cancel'},
+      {text: 'Excluir', style: 'destructive', onPress: aoConfirmar},
+    ],
+  );
+}
+
 export function confirmarSaida(aoConfirmar: () => void) {
   Alert.alert('Sair', 'Deseja sair da sua conta?', [
     {text: 'Cancelar', style: 'cancel'},

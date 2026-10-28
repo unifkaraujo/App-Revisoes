@@ -2,9 +2,11 @@ import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import CartaoRevisao from './CartaoRevisao';
 import {Revisao} from '../../../types/Revisao';
+import {Categoria} from '../../../types/Categoria';
 
 interface ListaRevisoesProps {
   revisoes: Revisao[];
+  categoriasPorId: Record<string, Categoria>;
   idExcluindo: string | null;
   onSelecionar: (revisao: Revisao) => void;
   onExcluir: (id: string) => void;
@@ -12,6 +14,7 @@ interface ListaRevisoesProps {
 
 export default function ListaRevisoes({
   revisoes,
+  categoriasPorId,
   idExcluindo,
   onSelecionar,
   onExcluir,
@@ -28,6 +31,11 @@ export default function ListaRevisoes({
       renderItem={({item: revisao}) => (
         <CartaoRevisao
           revisao={revisao}
+          categoria={
+            revisao.categoriaId
+              ? categoriasPorId[revisao.categoriaId]
+              : undefined
+          }
           excluindo={revisao.id === idExcluindo}
           onSelecionar={onSelecionar}
           onExcluir={onExcluir}
