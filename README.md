@@ -261,14 +261,6 @@ npx tsc --noEmit     # checagem de tipos
 npm run lint         # ESLint
 ```
 
-## 🗺️ Próximos passos
-
-- [ ] Testes unitários das regras de domínio (`utils/`) e dos hooks com React Native Testing Library
-- [ ] Notificações locais no dia da revisão
-- [ ] Sugestão automática do próximo intervalo (repetição espaçada progressiva)
-- [ ] React Navigation quando o número de telas crescer
-- [ ] Build e testes para iOS
-
 ---
 
 <p align="center">
