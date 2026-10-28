@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {cores} from '../theme/cores';
+import {NOME_APP} from '../config/app';
 
 interface LayoutAcessoProps {
   titulo: string;
@@ -20,7 +21,7 @@ export default function LayoutAcesso({
       keyboardShouldPersistTaps="handled"
       enableOnAndroid>
       <Text style={estilos.icone}>📘</Text>
-      <Text style={estilos.nomeApp}>RevisõesApp</Text>
+      <Text style={estilos.nomeApp}>{NOME_APP}</Text>
       <View style={estilos.cartao}>
         <Text style={estilos.titulo}>{titulo}</Text>
         {subtitulo && <Text style={estilos.subtitulo}>{subtitulo}</Text>}
