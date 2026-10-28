@@ -46,6 +46,7 @@ const estilos = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 2,
     borderColor: cores.borda,
+    maxWidth: '100%',
   },
   chipSelecionado: {
     borderColor: cores.tituloCabecalho,

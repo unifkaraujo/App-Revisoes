@@ -37,7 +37,6 @@ export default function FiltroCategorias({
           cor={categoria.cor}
           selecionado={categoria.id === idSelecionado}
           onPress={() => alternar(categoria.id)}
-          estilo={estilos.categoria}
         />
       ))}
       <Chip texto="Ver todas ▾" onPress={onVerTodas} />
@@ -48,11 +47,9 @@ export default function FiltroCategorias({
 const estilos = StyleSheet.create({
   linha: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 6,
     paddingHorizontal: 10,
     paddingBottom: 8,
-  },
-  categoria: {
-    flexShrink: 1,
   },
 });
