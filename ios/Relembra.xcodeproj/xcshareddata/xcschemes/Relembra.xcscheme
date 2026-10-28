@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RevisoesApp.app"
-               BlueprintName = "RevisoesApp"
-               ReferencedContainer = "container:RevisoesApp.xcodeproj">
+               BuildableName = "Relembra.app"
+               BlueprintName = "Relembra"
+               ReferencedContainer = "container:Relembra.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RevisoesAppTests.xctest"
-               BlueprintName = "RevisoesAppTests"
-               ReferencedContainer = "container:RevisoesApp.xcodeproj">
+               BuildableName = "RelembraTests.xctest"
+               BlueprintName = "RelembraTests"
+               ReferencedContainer = "container:Relembra.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RevisoesApp.app"
-            BlueprintName = "RevisoesApp"
-            ReferencedContainer = "container:RevisoesApp.xcodeproj">
+            BuildableName = "Relembra.app"
+            BlueprintName = "Relembra"
+            ReferencedContainer = "container:Relembra.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RevisoesApp.app"
-            BlueprintName = "RevisoesApp"
-            ReferencedContainer = "container:RevisoesApp.xcodeproj">
+            BuildableName = "Relembra.app"
+            BlueprintName = "Relembra"
+            ReferencedContainer = "container:Relembra.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

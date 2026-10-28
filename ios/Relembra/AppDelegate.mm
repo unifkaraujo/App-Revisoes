@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"RevisoesApp";
+  self.moduleName = @"Relembra";
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
