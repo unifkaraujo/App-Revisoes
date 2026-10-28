@@ -29,7 +29,7 @@ O **Relembra** é um aplicativo mobile para quem estuda com **revisões programa
 O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e evoluiu para um app multiusuário com arquitetura em camadas, autenticação completa e foco em código limpo.
 
 <p align="center">
-  <img src="docs/images/vitrine.png" alt="Telas do Relembra: login, lista de revisões e edição" width="100%" />
+  <img src="docs/images/vitrine.png" alt="Telas do Relembra: login, lista de revisões por categoria e edição" width="100%" />
 </p>
 
 ## ✨ Funcionalidades
@@ -46,9 +46,11 @@ O projeto nasceu como uma ferramenta de uso pessoal, que eu uso no dia a dia, e 
 
 ## 📱 Telas
 
-| Login | Cadastro | Lista de revisões | Busca | Edição |
-|:---:|:---:|:---:|:---:|:---:|
-| <img src="docs/images/login.png" width="170" alt="Tela de login" /> | <img src="docs/images/cadastro.png" width="170" alt="Tela de cadastro" /> | <img src="docs/images/lista.png" width="170" alt="Lista de revisões" /> | <img src="docs/images/pesquisa.png" width="170" alt="Busca filtrando revisões" /> | <img src="docs/images/edicao.png" width="170" alt="Modal de edição" /> |
+| Login | Cadastro | Lista de revisões |
+|:---:|:---:|:---:|
+| <img src="docs/images/login.png" width="230" alt="Tela de login" /> | <img src="docs/images/cadastro.png" width="230" alt="Tela de cadastro" /> | <img src="docs/images/lista.png" width="230" alt="Lista de revisões com cards coloridos por categoria" /> |
+| **Filtro por categoria** | **Todas as categorias** | **Edição** |
+| <img src="docs/images/filtro.png" width="230" alt="Lista filtrada pela categoria Programação" /> | <img src="docs/images/categorias.png" width="230" alt="Lista de categorias com contagem e exclusão" /> | <img src="docs/images/edicao.png" width="230" alt="Tela de edição com prévia recolhida do conteúdo" /> |
 
 > Os prints foram feitos num aparelho Android real, com uma conta de demonstração.
 
@@ -230,8 +232,8 @@ usuarios/
 ### Desenvolvimento
 
 ```bash
-git clone https://github.com/unifkaraujo/App-Revisoes.git
-cd App-Revisoes
+git clone https://github.com/unifkaraujo/relembra.git
+cd relembra
 npm install
 
 npm start            # terminal 1: Metro bundler
